@@ -34,7 +34,7 @@
     const dy = event.clientY - lastY;
     if (Math.hypot(event.clientX - startX, event.clientY - startY) > 5) moved = true;
     if (moved) {
-      yaw += dx * .9;
+      yaw += dx * 2;
       pitch = Math.max(-65, Math.min(65, pitch - dy * .65));
       render();
     }
