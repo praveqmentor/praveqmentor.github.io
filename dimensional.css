@@ -47,6 +47,14 @@ html { scroll-padding-top: 84px; }
     linear-gradient(180deg,rgba(193,207,230,.085) 0 1px,transparent 1px),
     linear-gradient(180deg,rgba(22,29,40,.08),rgba(6,9,14,.56));
 }
+.hero-wordmark {
+  position:absolute; z-index:0; top:16%; left:50%; transform:translateX(-50%);
+  width:max-content; max-width:100%; margin:0; pointer-events:none;
+  color:rgba(224,233,250,.12);
+  font:500 clamp(32px,5.8vw,82px)/1 "DM Mono",monospace;
+  letter-spacing:.15em; white-space:nowrap;
+  text-shadow:0 0 38px rgba(170,194,232,.08);
+}
 .hero-scene {
   position:relative; z-index:1; width:min(86vw,560px); height:min(75svh,560px);
   min-height:310px; perspective:1100px;
@@ -121,6 +129,7 @@ html { scroll-padding-top: 84px; }
 
 @media (max-width:760px) {
   .hero { padding:16px; }
+  .hero-wordmark { top:16%; font-size:clamp(21px,5.5vw,42px); letter-spacing:.08em; color:rgba(224,233,250,.14); }
   .hero-scene { width:min(94vw,500px); height:min(72svh,520px); }
   .scene-rotor { inset:14% 3%; }
 }
