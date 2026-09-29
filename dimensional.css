@@ -32,7 +32,7 @@ html { scroll-padding-top: 84px; }
   --pitch:0deg; --yaw:0deg;
   position:absolute; inset:10% 8%; transform-style:preserve-3d;
   transform:rotateX(var(--pitch)) rotateY(var(--yaw));
-  transition:transform .85s cubic-bezier(.2,.75,.25,1);
+  transition:transform 1.25s cubic-bezier(.2,.75,.25,1);
   cursor:grab; touch-action:none; outline:none;
 }
 .scene-rotor:active { cursor:grabbing; }
