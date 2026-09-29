@@ -34,6 +34,9 @@ html { scroll-padding-top: 84px; }
   transform:rotateX(var(--pitch)) rotateY(var(--yaw));
   transition:transform .9s cubic-bezier(.18,.8,.22,1);
   cursor:grab; touch-action:none; outline:none;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none; user-select:none;
 }
 .scene-rotor:active { cursor:grabbing; }
 .scene-rotor:focus-visible { outline:2px solid #b8ceff; outline-offset:8px; }
@@ -73,7 +76,7 @@ html { scroll-padding-top: 84px; }
 .scene-logo {
   position:relative; width:min(72%,370px); max-height:85%; object-fit:contain;
   filter:invert(1) contrast(1.45); mix-blend-mode:screen; opacity:.9;
-  user-select:none; pointer-events:none;
+  -webkit-user-drag:none; user-select:none; pointer-events:none;
 }
 
 .manifesto, .mentor, .founder, .system, .support, .plans, .flow, .contact { position:relative; }
