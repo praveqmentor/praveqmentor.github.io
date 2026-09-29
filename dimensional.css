@@ -78,7 +78,7 @@ html { scroll-padding-top: 84px; }
   position:absolute; inset:0; display:grid; place-items:center; overflow:hidden;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;
   border:2px solid rgba(230,241,255,.52); border-radius:20px;
-  background:linear-gradient(145deg,rgba(237,245,255,.16),rgba(161,191,250,.045) 48%,rgba(20,33,63,.12));
+  background:linear-gradient(145deg,rgba(39,48,64,.96),rgba(9,13,21,.98) 44%,rgba(4,7,13,.99) 100%);
   -webkit-backdrop-filter:blur(16px) saturate(1.2);
   backdrop-filter:blur(16px) saturate(1.2);
   box-shadow:0 48px 95px rgba(0,0,0,.54),inset 0 2px rgba(255,255,255,.5),inset 0 -3px 8px rgba(175,202,255,.2),0 0 75px rgba(112,149,231,.12);
@@ -87,7 +87,7 @@ html { scroll-padding-top: 84px; }
 .scene-back { transform:rotateY(180deg) translateZ(12px); }
 .scene-panel:before {
   content:""; position:absolute; inset:0;
-  background:linear-gradient(117deg,rgba(255,255,255,.18),transparent 29%,transparent 62%,rgba(202,222,255,.07));
+  background:linear-gradient(117deg,rgba(255,255,255,.13),transparent 31%,transparent 68%,rgba(202,222,255,.045));
   pointer-events:none;
 }
 .scene-panel:after {
@@ -97,7 +97,7 @@ html { scroll-padding-top: 84px; }
 }
 .scene-logo {
   position:relative; width:min(72%,370px); max-height:85%; object-fit:contain;
-  filter:invert(1) contrast(1.45); mix-blend-mode:screen; opacity:.9;
+  opacity:.96;
   -webkit-user-drag:none; user-select:none; pointer-events:none;
 }
 
