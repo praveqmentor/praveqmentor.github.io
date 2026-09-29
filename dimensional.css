@@ -48,10 +48,10 @@ html { scroll-padding-top: 84px; }
     linear-gradient(180deg,rgba(22,29,40,.08),rgba(6,9,14,.56));
 }
 .hero-wordmark {
-  position:absolute; z-index:0; top:12%; left:50%; transform:translateX(-50%);
+  position:absolute; z-index:0; top:10%; left:50%; transform:translateX(-50%);
   width:max-content; max-width:100%; margin:0; pointer-events:none;
   color:rgba(224,233,250,.12);
-  font:500 clamp(38px,7vw,108px)/1 "DM Mono",monospace;
+  font:500 clamp(32px,5vw,78px)/1 "DM Mono",monospace;
   letter-spacing:.15em; white-space:nowrap;
   text-shadow:0 0 38px rgba(170,194,232,.08);
 }
