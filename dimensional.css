@@ -195,7 +195,7 @@ html { scroll-padding-top: 84px; }
 }
 
 /* Approved Shu studio photograph. */
-.hero { --hero-photo:url("hero-shu-studio.svg"); background-position:center; }
+.hero { --hero-photo:url("hero-shu-studio.svg?v=natural-pose"); background-position:center; }
 @media(max-width:760px) { .hero { background-position:18% center; } }
 
 /* Keep the wordmark above the portrait face. */
