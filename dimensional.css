@@ -145,3 +145,27 @@ html { scroll-padding-top: 84px; }
 @media (prefers-reduced-motion:reduce) {
   .scene-rotor { transition:none; }
 }
+
+/* Static photographic hero. Replace hero-background.jpg when the photo is ready. */
+.hero {
+  background:#51565c;
+  background-image:url("hero-background.jpg"),linear-gradient(135deg,#62686d,#393f45);
+  background-size:cover; background-position:center;
+}
+.hero:before { background:rgba(0,0,0,.12); }
+.hero:after,.hero-wordmark,.scene-aura,.scene-edge,.scene-back { display:none; }
+.hero-scene { width:min(76vw,620px); height:min(68svh,560px); min-height:0; perspective:none; }
+.scene-stage { transform:none; }
+.scene-rotor { inset:0; transform:none; cursor:default; touch-action:auto; will-change:auto; }
+.scene-panel.scene-front {
+  transform:none; border:0; border-radius:0; background:transparent;
+  box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none; overflow:visible;
+}
+.scene-panel:before,.scene-panel:after { display:none; }
+.scene-logo { width:min(80%,490px); max-height:85%; opacity:1; filter:drop-shadow(0 2px 14px rgba(0,0,0,.08)); }
+.site-header { background:transparent; }
+.site-header nav a { color:rgba(255,255,255,.9); }
+@media(max-width:760px) {
+  .hero-scene { width:86vw; height:58svh; }
+  .scene-rotor { inset:0; }
+}
