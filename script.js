@@ -32,8 +32,16 @@
     template.className = 'paper-document';
     template.style.top = -origin + 'px';
     template.style.background = getComputedStyle(document.body).backgroundColor;
-    for (const node of [...document.body.children]) {
-      if (['HEADER','MAIN','FOOTER'].includes(node.tagName)) template.append(node.cloneNode(true));
+    const mainCopy = document.querySelector('main').cloneNode(false);
+    template.append(mainCopy);
+    for (const node of [document.querySelector('header'), ...sections, document.querySelector('footer')]) {
+      if (!node) continue;
+      const rect = node.getBoundingClientRect();
+      if (rect.bottom <= 0 || rect.top >= height) continue;
+      const copy = node.cloneNode(true);
+      Object.assign(copy.style, {position:'absolute', top:rect.top+origin+'px',
+        left:rect.left+'px', width:rect.width+'px', margin:'0', boxSizing:'border-box'});
+      (node.tagName === 'SECTION' ? mainCopy : template).append(copy);
     }
     template.querySelectorAll('.page-turn').forEach(node => node.classList.add('page-open'));
     template.querySelectorAll('[autofocus]').forEach(node => node.removeAttribute('autofocus'));
