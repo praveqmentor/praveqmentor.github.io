@@ -149,7 +149,7 @@ html { scroll-padding-top: 84px; }
 /* Static photographic hero. Replace hero-background.jpg when the photo is ready. */
 .hero {
   background:#51565c;
-  background-image:url("hero-background.jpg"),linear-gradient(135deg,#62686d,#393f45);
+  background-image:var(--hero-photo,linear-gradient(135deg,#62686d,#393f45));
   background-size:cover; background-position:center;
 }
 .hero:before { background:rgba(0,0,0,.12); }
