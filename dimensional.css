@@ -179,3 +179,17 @@ html { scroll-padding-top: 84px; }
   transform:translateX(-.025em); user-select:none;
 }
 @media(max-width:760px) { .hero-brand { font-size:8.2vw; } }
+
+/* Left-aligned navigation and symbol before the central wordmark. */
+.site-header { justify-content:flex-start; padding:0 28px; height:72px; }
+.site-header nav { justify-content:flex-start; gap:26px; }
+.site-header nav a { font-size:10px; letter-spacing:.07em; }
+.hero-brand { display:flex; align-items:center; justify-content:center; gap:.18em; font-size:clamp(28px,7.4vw,110px); }
+.hero-brand-mark { display:block; flex:none; width:1.1em; height:.65em; overflow:hidden; }
+.hero-brand span { display:block; }
+@media(max-width:760px) {
+  .site-header { padding:0 20px; height:64px; }
+  .site-header nav { gap:20px; }
+  .site-header nav a { font-size:9px; }
+  .hero-brand { font-size:7.4vw; gap:.15em; }
+}
