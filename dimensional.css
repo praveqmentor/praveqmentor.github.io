@@ -231,3 +231,10 @@ html { scroll-padding-top: 84px; }
 .contact form .form-note { margin:0; font-size:10px; line-height:1.5; }
 .contact form .form-success:empty { display:none; }
 @media(max-width:760px) { .contact form { max-width:none; padding:18px; gap:11px; } }
+
+/* Persistent contact shortcut, sized for touch and safe-area insets. */
+.floating-contact { position:fixed; z-index:100; right:calc(28px + env(safe-area-inset-right,0px)); bottom:calc(24px + env(safe-area-inset-bottom,0px)); display:inline-flex; align-items:center; gap:24px; min-height:52px; padding:16px 26px; border:1px solid rgba(255,255,255,.8); border-radius:999px; background:#111; color:#fff; box-shadow:0 6px 24px rgba(0,0,0,.2); font:500 12px "DM Mono",monospace; letter-spacing:.08em; text-decoration:none; transition:background .2s,color .2s; }
+.floating-contact:hover { background:#fff; color:#111; border-color:#111; }
+.floating-contact:focus-visible { outline:2px solid #888; outline-offset:4px; }
+.floating-contact span { font-size:19px; line-height:1; }
+@media(max-width:760px) { .floating-contact { right:calc(16px + env(safe-area-inset-right,0px)); bottom:calc(16px + env(safe-area-inset-bottom,0px)); min-height:48px; padding:13px 20px; font-size:11px; gap:18px; } }
