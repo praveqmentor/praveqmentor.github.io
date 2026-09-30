@@ -193,3 +193,7 @@ html { scroll-padding-top: 84px; }
   .site-header nav a { font-size:9px; }
   .hero-brand { font-size:7.4vw; gap:.15em; }
 }
+
+/* Approved Shu studio photograph. */
+.hero { --hero-photo:url("hero-shu-studio.svg"); background-position:center; }
+@media(max-width:760px) { .hero { background-position:18% center; } }
