@@ -1,0 +1,15 @@
+/* Viewport paper overlay; the document underneath keeps its existing layout. */
+main > .page-turn { opacity:1!important; transform:none!important; filter:none!important; transition:none!important; }
+html.paper-turning { scroll-behavior:auto!important; }
+.paper-flip { position:fixed; inset:0; z-index:10000; pointer-events:none; overflow:hidden; perspective:2200px; perspective-origin:50% 50%; }
+.paper-strip { position:absolute; top:0; left:0; height:100%; transform-origin:0 50%; transform-style:preserve-3d; will-change:transform; }
+.paper-front,.paper-back { position:absolute; inset:0; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+.paper-front { background:#f7f7f4; }
+.paper-back { background:linear-gradient(90deg,#e3e1dc,#f5f4ef); transform:rotateY(180deg); }
+.paper-content { position:absolute; top:0; height:100%; overflow:hidden; }
+.paper-document { position:absolute; left:0; width:100%; }
+.paper-document *, .paper-document *:before,.paper-document *:after { animation:none!important; transition:none!important; }
+.paper-shade { position:absolute; inset:0; background:#000; opacity:0; }
+.paper-shadow { position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.18),transparent 70%); opacity:0; }
+@media(max-width:760px) { .paper-flip { perspective:1400px; } }
+@media(prefers-reduced-motion:reduce) { .paper-flip { display:none; } }
