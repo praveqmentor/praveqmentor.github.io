@@ -169,3 +169,13 @@ html { scroll-padding-top: 84px; }
   .hero-scene { width:86vw; height:58svh; }
   .scene-rotor { inset:0; }
 }
+
+/* Reference-style central wordmark */
+.hero-brand {
+  position:relative; z-index:1; width:100%; text-align:center;
+  color:#fff; font-family:Arial,Helvetica,sans-serif; font-weight:900;
+  font-style:italic; font-size:clamp(28px,8vw,120px);
+  line-height:1; letter-spacing:-.065em; white-space:nowrap;
+  transform:translateX(-.025em); user-select:none;
+}
+@media(max-width:760px) { .hero-brand { font-size:8.2vw; } }
