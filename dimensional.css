@@ -204,3 +204,8 @@ html { scroll-padding-top: 84px; }
 /* Keep the mission headline on exactly two deliberate lines. */
 .manifesto-grid > h2 { min-width:0; font-size:min(64px,4.25vw); white-space:nowrap; }
 @media(max-width:760px) { .manifesto-grid > h2 { font-size:min(43px,10.5vw); } }
+
+/* Preserve the mentor heading as two deliberate lines. */
+.mentor-heading { min-width:0; }
+.mentor-heading h2 { font-size:min(48px,3.3vw); white-space:nowrap; }
+@media(max-width:760px) { .mentor-heading h2 { font-size:min(39px,8.8vw); } }
