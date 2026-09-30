@@ -221,3 +221,13 @@ html { scroll-padding-top: 84px; }
 .contact form .button { background:#111; color:#fff; border-color:#111; }
 .contact form .button:hover { background:#333; color:#fff; }
 .contact form .form-note { color:#555; }
+
+/* Compact inquiry form. */
+.contact form { width:100%; max-width:420px; justify-self:end; padding:22px; gap:12px; }
+.contact form label { margin:0; font-size:11px; line-height:1.4; }
+.contact form input,.contact form select,.contact form textarea { margin-top:5px; padding:9px 10px; font-size:12px; min-height:36px; border-radius:0; }
+.contact form textarea { min-height:58px; }
+.contact form .button { padding:11px 14px; min-height:38px; font-size:12px; }
+.contact form .form-note { margin:0; font-size:10px; line-height:1.5; }
+.contact form .form-success:empty { display:none; }
+@media(max-width:760px) { .contact form { max-width:none; padding:18px; gap:11px; } }
