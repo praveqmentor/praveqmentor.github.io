@@ -77,13 +77,13 @@ html { scroll-padding-top: 84px; }
   filter:blur(14px);
 }
 .scene-stage {
-  position:absolute; inset:0; transform-style:preserve-3d;
+  position:absolute; inset:0; transform:scale(.88); transform-style:preserve-3d;
 }
 .scene-rotor {
   --pitch:0deg; --yaw:0deg;
   position:absolute; inset:9% 7%; transform-style:preserve-3d;
   transform:rotateX(var(--pitch)) rotateY(var(--yaw));
-  transition:transform .9s cubic-bezier(.18,.8,.22,1);
+  transition:none; will-change:transform;
   cursor:grab; touch-action:none; outline:none;
   -webkit-tap-highlight-color:transparent;
   -webkit-touch-callout:none;
