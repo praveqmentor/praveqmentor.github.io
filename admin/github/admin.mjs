@@ -1,6 +1,6 @@
-import {sessionState} from './session.mjs?v=20261025-8';
+import {sessionState} from './session.mjs?v=20261025-9';
 const tabState=sessionState(sessionStorage);
-import {GitJournal} from './github-store.mjs?v=20261025-8';
+import {GitJournal} from './github-store.mjs?v=20261025-9';
 import {escapeHTML as esc,renderMarkdown,articleArt,readingMinutes,normalizeVisual} from './journal-format.mjs';
 const $=s=>document.querySelector(s),form=$('#post-form');
 let store=null,authPopup=null,config=null,oauthAttempt=null;
