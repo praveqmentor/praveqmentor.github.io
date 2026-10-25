@@ -1,0 +1,1 @@
+const params=new URLSearchParams(location.search),code=params.get('code'),state=params.get('state');history.replaceState(null,'',location.pathname);if(window.opener&&code&&state){window.opener.postMessage({type:'praveq-github-code',code,state},'https://praveqmentor.github.io');window.close();}else{document.querySelector('#status').textContent='編集画面からログインをやり直してください。';}
