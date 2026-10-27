@@ -1,0 +1,3 @@
+import {owner,checkWrite,payload,postById,savePost,responseError} from '../../../../../lib/journal-store';
+export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){try{owner(request);return Response.json({post:await postById((await params).id)},{headers:{'Cache-Control':'no-store'}});}catch(e){return responseError(e);}}
+export async function PUT(request:Request,{params}:{params:Promise<{id:string}>}){try{const u=checkWrite(request);return Response.json({post:await savePost(await payload(request),u.id,(await params).id)},{headers:{'Cache-Control':'no-store'}});}catch(e){return responseError(e);}}

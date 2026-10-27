@@ -1,0 +1,4 @@
+import {publicPosts,responseError} from '../../../lib/journal-store';
+import {renderArticle} from '../../../lib/article-template';
+export const dynamic='force-dynamic';
+export async function GET(_request:Request,{params}:{params:Promise<{slug:string}>}){try{const slug=(await params).slug;const posts=await publicPosts();const p=posts.find(x=>x.slug===slug);if(!p)return new Response('<!doctype html><html lang="ja"><meta charset="utf-8"><title>記事が見つかりません | PRAVEQ</title><link rel="stylesheet" href="/styles.css"><main class="article-page"><h1>記事が見つかりません。</h1><p>下書きや取り下げた記事は表示されません。</p><a class="text-link" href="/journal/">Journalへ戻る ↗</a></main></html>',{status:404,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});return new Response(renderArticle(p,posts.filter(x=>x.slug!==slug).slice(0,2)),{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});}catch(e){return responseError(e);}}

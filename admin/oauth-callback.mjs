@@ -1,1 +1,0 @@
-const params=new URLSearchParams(location.search),code=params.get('code'),state=params.get('state');if(code&&state){location.replace('/admin/studio/?'+new URLSearchParams({code,state}));}else{document.querySelector('#status').textContent='編集画面からログインをやり直してください。';}
