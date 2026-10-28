@@ -1,3 +1,4 @@
+import {emptyDistribution,validateDistribution} from './distribution.mjs';
 import {validatePost} from './journal-format.mjs';
 export const encodeText=s=>btoa(Array.from(new TextEncoder().encode(s),b=>String.fromCharCode(b)).join(''));
 export const decodeText=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,'')),c=>c.charCodeAt(0)));
@@ -9,8 +10,21 @@ export class GitJournal{
  async list(ref=this.branch){let files;try{files=await this.file(this.folder+'/posts',ref);}catch(e){if(e.status===404)return [];throw e;}return Promise.all(files.filter(f=>f.name.endsWith('.json')).map(async f=>JSON.parse(decodeText((await this.file(f.path,ref)).content))));}
  async save(raw,id){const v=validatePost(raw);if(!v.valid){const e=new Error('入力内容を確認してください。');e.details=v.errors;throw e;}const branch=await this.request(this.repo+'/git/ref/heads/'+this.branch);const parent=branch.object.sha;const entries=await this.list(parent),old=id?entries.find(p=>p.id===id):null;if(id&&!old)throw new Error('記事が見つかりません。');if(old&&old.revision!==raw.revision)throw new Error('別の画面で更新されています。入力をコピーしてから開き直してください。');if(old?.first_published_at&&old.slug!==v.data.slug)throw new Error('掲載した記事のURLは変更できません。');if(entries.some(p=>p.id!==id&&p.slug===v.data.slug))throw new Error('このURLは使われています。');const now=new Date().toISOString();const post={...v.data,id:id||crypto.randomUUID(),revision:(old?.revision||0)+1,created_at:old?.created_at||now,updated_at:now,first_published_at:old?.first_published_at||(v.data.status==='published'?now:null)};
  const commit=await this.request(this.repo+'/git/commits/'+parent);const tree=await this.request(this.repo+'/git/trees','POST',{base_tree:commit.tree.sha,tree:[{path:this.folder+'/posts/'+post.id+'.json',mode:'100644',type:'blob',content:JSON.stringify(post,null,2)+'\n'}]});const next=await this.request(this.repo+'/git/commits','POST',{message:'Journal: '+post.title+' (v'+post.revision+')',tree:tree.sha,parents:[parent]});const saved=await this.request(this.repo+'/git/refs/heads/'+this.branch,'PATCH',{sha:next.sha,force:false});return {post,publication:saved.publication||{ok:false}};}
+ async distribution(post,ref=this.branch){try{return validateDistribution(JSON.parse(decodeText((await this.file(this.folder+'/distribution/'+post.id+'.json',ref)).content)),post.id);}catch(e){if(e.status===404)return emptyDistribution(post);throw e;}}
+ async saveDistribution(raw,id){
+  if(!/^[a-zA-Z0-9-]{1,100}$/.test(id))throw Error('記事IDが不正です。');
+  const data=validateDistribution(raw,id),branch=await this.request(this.repo+'/git/ref/heads/'+this.branch),parent=branch.object.sha;
+  const entries=await this.list(parent),post=entries.find(p=>p.id===id);if(!post)throw Error('先にJournal記事を保存してください。');
+  const old=await this.distribution(post,parent);if(old.revision!==raw.revision)throw Error('別の画面で配信下書きが更新されています。書き出してから開き直してください。');
+  const distribution={...data,revision:old.revision+1,updated_at:new Date().toISOString()};
+  const commit=await this.request(this.repo+'/git/commits/'+parent);
+  const tree=await this.request(this.repo+'/git/trees','POST',{base_tree:commit.tree.sha,tree:[{path:this.folder+'/distribution/'+id+'.json',mode:'100644',type:'blob',content:JSON.stringify(distribution,null,2)+'\n'}]});
+  const next=await this.request(this.repo+'/git/commits','POST',{message:'Distribution: '+post.title+' (v'+distribution.revision+')',tree:tree.sha,parents:[parent]});
+  const saved=await this.request(this.repo+'/git/refs/heads/'+this.branch,'PATCH',{sha:next.sha,force:false});return {distribution,publication:saved.publication||{ok:false}};
+ }
  async history(id){const path=this.folder+'/posts/'+id+'.json';const commits=await this.request(this.repo+'/commits?sha='+this.branch+'&path='+encodeURIComponent(path)+'&per_page=20');return {revisions:await Promise.all(commits.map(async c=>{const post=JSON.parse(decodeText((await this.file(path,c.sha)).content));return {revision:post.revision,snapshot:JSON.stringify(post),created_at:c.commit.committer.date};}))};}
  async upload(blob){if(blob.size>8*1024*1024)throw new Error('写真は8MB以内にしてください。');const id=crypto.randomUUID()+'.jpg';const bytes=new Uint8Array(await blob.arrayBuffer());if(bytes[0]!==255||bytes[1]!==216)throw new Error('JPEG形式に変換できませんでした。');const content=btoa(Array.from(bytes,b=>String.fromCharCode(b)).join(''));await this.request(this.repo+'/contents/'+this.folder+'/media/'+id,'PUT',{message:'Journal: upload cover photograph',branch:this.branch,content});return {url:'/media/journal/'+id};}
  async image(path){if(this.objectURLs.has(path))return this.objectURLs.get(path);if(!/^\/media\/journal\/[a-f0-9-]{36}\.jpg$/.test(path))return '';const f=await this.file(this.folder+'/media/'+path.split('/').pop());const blob=new Blob([Uint8Array.from(atob(f.content.replace(/\s/g,'')),c=>c.charCodeAt(0))],{type:'image/jpeg'});const url=URL.createObjectURL(blob);this.objectURLs.set(path,url);return url;}
  close(){this.token='';for(const url of this.objectURLs.values())URL.revokeObjectURL(url);this.objectURLs.clear();}
 }
+
